@@ -18,6 +18,7 @@
 
 # venv
 venv/
+migrations/
 
 # system ignore
 .DS_Store
