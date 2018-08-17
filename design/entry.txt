@@ -1,0 +1,3 @@
+商品  Goods
+类别  Category
+仓库  Repertory
