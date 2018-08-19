@@ -382,7 +382,7 @@ the specific language governing permissions and limitations under the Apache Lic
                         if (requestNumber < requestSequence) {
                             return;
                         }
-                        // TODO - replace query.page with query so users have access to term, page, etc.
+                        // TODO - replace query.page with query so core have access to term, page, etc.
                         var results = options.results(data, query.page);
                         query.callback(results);
                     }
@@ -2707,7 +2707,7 @@ the specific language governing permissions and limitations under the Apache Lic
         return (value === undefined) ? this : value;
     };
 
-    // plugin defaults, accessible to users
+    // plugin defaults, accessible to core
     $.fn.select2.defaults = {
         width: "copy",
         loadMorePadding: 0,

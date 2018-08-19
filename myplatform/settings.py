@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'xadmin',
     'crispy_forms',
-    'users',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +131,6 @@ USE_TZ = False  # 数据库获取本地时间,如果为True则取国际时间
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_ROOT = '/var/www/online/static/'  # 项目上线使用
+
+# 设置默认用户类
+AUTH_USER_MODEL = 'core.UserProfile'
