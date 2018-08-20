@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from conf.constant import FIRST_USER_ID
 from django.utils.translation import gettext_lazy as _
@@ -41,12 +42,31 @@ class UserProfile(AbstractUser):
     def __str__(self):
         return self.username
 
+# https://www.processon.com/view/56c409abe4b0e2317a865295
+# https://www.processon.com/view/56c480e0e4b0e5041c358d9e
+# https://www.processon.com/view/5b04237fe4b01f32972cc7d3
+# https://www.processon.com/view/5899659be4b0c87c6402178f
 
 class Inventory(models.Model):
     """
     仓库信息表
     """
-    pass
+    code = models.CharField(u'仓库编码', max_length=32)
+    name = models.CharField(u'仓库名称', max_length=32)
+    inventory_category = models.CharField(u'仓库类型', max_length=32, default=u'普通仓')
+    address = models.CharField(u'仓库地址', max_length=64, blank=True, null=True)
+    phone_number = models.BigIntegerField(u'联系电话', null=True, blank=True)
+
+
+class Supplier(models.Model):
+    """
+    供应商信息表
+    """
+    name = models.CharField(u'供应商名', max_length=64)
+    contact = models.CharField(u'联系人', max_length=32)
+    contact_number = models.BigIntegerField(u'联系电话')
+    address = models.CharField(u'地址', max_length=64, blank=True, null=True)
+    remarks = models.TextField(u'备注', blank=True, null=True)
 
 
 class GoodsCategory(models.Model):
@@ -76,6 +96,24 @@ class Goods(models.Model):
     unit = models.CharField(_('基本单位'), blank=True, default=u'个')
     default_inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, verbose_name=u'默认仓库')
     category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, verbose_name=u'商品类型')
+
+
+class Stockin(models.Model):
+    """
+    入库信息表
+    """
+    order_id = models.BigIntegerField(u'入库单ID')
+    comment = models.CharField(u'描述', blank=True, null=True)
+    order_sn = models.CharField(u'订单号')
+    add_time = models.DateTimeField(u'添加时间', default=timezone.now)
+    out_time = models.DateTimeField(u'出库时间', null=True, blank=True)
+    stockin_type = models.CharField(u'入库类型', default=u'入库')
+    inventory = models.ForeignKey(Inventory,  on_delete=models.CASCADE, verbose_name=u'仓库')
+    state = models.IntegerField(u'入库状态')
+    add_user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name=u'添加人')
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, verbose_name=u'供应商')
+
+
 
 
 
