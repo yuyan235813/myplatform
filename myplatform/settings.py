@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.UserProfileMiddleware'
 ]
 
 ROOT_URLCONF = 'myplatform.urls'
@@ -134,3 +135,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 设置默认用户类
 AUTH_USER_MODEL = 'core.UserProfile'
+# 30分钟
+USER_ONLINE_TIMEOUT = 60 * 30
+# 7天
+USER_LAST_LOGIN_EXPIRE = 60 * 60 * 24 * 7

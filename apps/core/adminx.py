@@ -8,7 +8,7 @@
 
 import xadmin
 from xadmin import views
-from .models import UserProfile
+from .models import *
 from xadmin.plugins.auth import UserAdmin
 from .forms import (
     MyUserChangeForm, MyUserCreationForm
@@ -92,7 +92,78 @@ class UserProfileAdmin(UserAdmin):
         return super(UserAdmin, self).get_model_form(**kwargs)
 
 
+class GoodsAdmin:
+    """
+    商品管理
+    """
+    list_display = ['code', 'name', 'producer', 'purchasing_price']
+    list_filter = ['code', 'name', 'producer']
+    search_fields = ['code', 'name', 'producer']
+    model_icon = 'fa fa-star'
+
+
+class StateAdmin:
+    """
+    商品状态mapping表
+    """
+    list_display = ['name']
+    list_filter = ['name']
+    search_fields = ['name']
+    model_icon = 'fa fa-star'
+
+
+class InventoryAdmin:
+    """
+    仓库信息表
+    """
+    list_display = ['code', 'name', 'inventory_category', 'address', 'phone_number']
+    list_filter = ['code', 'name', 'inventory_category']
+    search_fields = ['code', 'name', 'inventory_category']
+    model_icon = 'fa fa-star'
+
+
+class SupplierAdmin:
+    """
+    供应商信息表
+    """
+    list_display = ['name', 'contact', 'contact_number', 'address']
+    list_filter = ['name', 'contact']
+    search_fields = ['name', 'contact']
+    model_icon = 'fa fa-star'
+
+
+class GoodsCategoryAdmin:
+    """
+    商品类型表
+    """
+    list_display = ['name', 'parent', 'level', 'state']
+    list_filter = ['name', 'level', 'state']
+    search_fields = ['name']
+    model_icon = 'fa fa-star'
+
+
+class StockinAdmin:
+    """
+    入库信息表
+    """
+    list_display = ['order_id', 'comment', 'order_sn', 'add_time', 'stockin_type']
+    list_filter = ['order_id', 'comment', 'order_sn', 'add_time', 'stockin_type']
+    search_fields = ['order_id']
+    model_icon = 'fa fa-star'
+
+
+
+
 xadmin.site.register(views.CommAdminView, GlobalSettings)
 xadmin.site.register(views.BaseAdminView, BaseSettings)
 xadmin.site.unregister(UserProfile)
 xadmin.site.register(UserProfile, UserProfileAdmin)
+xadmin.site.register(Goods, GoodsAdmin)
+xadmin.site.register(GoodsUnit, StateAdmin)
+xadmin.site.register(GoodsState, StateAdmin)
+xadmin.site.register(CategoryState, StateAdmin)
+xadmin.site.register(StockinState, StateAdmin)
+xadmin.site.register(Inventory, InventoryAdmin)
+xadmin.site.register(Supplier, SupplierAdmin)
+xadmin.site.register(GoodsCategory, GoodsCategoryAdmin)
+xadmin.site.register(Stockin, StockinAdmin)

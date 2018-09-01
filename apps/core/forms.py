@@ -17,7 +17,7 @@ class MyUserChangeForm(UserChangeForm):
     """
     更改用户信息的Form
     """
-    username = forms.IntegerField(label=u'用户名', widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    username = forms.CharField(label=u'用户名', widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     password = ReadOnlyPasswordHashField(
         label=_("Password"),
         help_text=_(
