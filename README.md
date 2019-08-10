@@ -16,3 +16,19 @@ mysql -uroot
 create database myplatform;
 ```
 
+## 安装 django2.0
+```
+pip install django==2.0
+pip install pymysql
+pip install django-crispy-forms
+pip install django-formtools
+pip install git+git://github.com/sshwsfc/xadmin.git@django2
+```
+
+## django(https://docs.djangoproject.com/zh-hans/2.0/intro/tutorial01/)
+
+```
+python manage.py migrate
+python manage.py createsuperuser
+```
+
